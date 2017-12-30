@@ -18,10 +18,10 @@ class Logistic_Predictor:
     clf = joblib.load(sys.path[0].replace('\\','/')+'/model/logistic_estimator.pkl')
     vector_tfidf = joblib.load(sys.path[0].replace('\\','/')+'/model/tf_idf.pkl')
 
-    def __init__(self, test_data, test_label):
-        self.test_data = self.vector_tfidf.transform(test_data)
-        self.test_label = test_label
-    #重置测试数据
+    def __init__(self):
+        self.test_data = []
+        self.test_label = []
+    #设置样本数据
     def reset_data(self, test_data, test_label):
         self.test_data = self.vector_tfidf.transform(test_data)
         self.test_label = test_label
@@ -33,9 +33,9 @@ class Logistic_Predictor:
     
     #预测，返回概率。return list.
     def predict_proba(self, test_data):
+        test_data = self.vector_tfidf.transform([test_data])
         result = self.clf.predict_proba(test_data)
-        result = np.round(result, 2)
-        num = result.shape[0]
+        result = np.round(result, 4)
         return result
 
 if '__main__' == __name__:
@@ -50,6 +50,8 @@ if '__main__' == __name__:
     predictor.predict()
     
     #reset data
-    predictor.predict_proba(test_data[:10])
+    result = predictor.predict_proba(test_data[8])
+    #result 第一个元素大:0 ; 第二个元素大:1
+    print(result, test_label[8])
 
     print("predicting time: %0.3fs" % (t.time() - t0))

@@ -13,11 +13,11 @@ if '__main__' == __name__:
 
     #predict data
     #参数为原始数据，test_data, test_label。
-    predictor = LRP.Logistic_Predictor(test_data, test_label)
-    predictor.predict_proba()
+    predictor = LRP.Logistic_Predictor()
     
     #reset data
-    predictor.reset_data(test_data[:10], test_label[:10])
-    predictor.predict_proba()
+    result = predictor.predict_proba(test_data[11])
+    #result 第一个元素大:0 ; 第二个元素大:1
+    print(result, test_label[8])
 
     print("predicting time: %0.3fs" % (t.time() - t0))
