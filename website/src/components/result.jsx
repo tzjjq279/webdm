@@ -31,21 +31,21 @@ class Results extends React.Component {
     }
     console.log(323232)
     return (
-        <div style={{marginTop: 20}}>
+        <div style={{marginTop: 20, width: '100%'}}>
             <Card className={classes.card}>
             {message}
             </Card>
             <h3> 判断结果 </h3>
             <div style={{width: '100%'}}>
-            <Grid container spacing={24}>
-                <Grid item lg={12}>
+            <Grid container>
+                <Grid item xs={4} sm={6}>
                     <Progress
                         type="dashboard"
                         percent={result.prob.toFixed(2)*100}
                         status={status}
                     />
                 </Grid>
-                <Grid item lg={12}>
+                <Grid item xs={6}>
                     <CardContent>
                         <Typography>该短信为</Typography>
                         <Typography type="display1" color="secondary">
